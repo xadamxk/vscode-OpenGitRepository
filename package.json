@@ -1,10 +1,16 @@
 {
   "name": "open-git-repository",
   "displayName": "Open Git Repository",
-  "description": "Open remote git repository links in your browser (GitHub, BitBucket, GitLab, SourceForge, and more!)",
+  "description": "Open git repository links in your browser (GitHub, BitBucket, GitLab, SourceForge, and more!)",
   "version": "0.0.1",
+  "license": "MIT",
+  "publisher": "xadamxk",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/xadamxk/vscode-OpenGitRepository.git"
+  },
   "engines": {
-    "vscode": "^1.40.0"
+    "vscode": "^1.85.0"
   },
   "categories": [
     "Other"
@@ -16,10 +22,52 @@
     "repository"
   ],
   "activationEvents": [
-    "*"
+    "workspaceContains:.git",
+    "onStartupFinished"
   ],
   "main": "./dist/extension.js",
   "contributes": {
+    "configuration": [
+      {
+        "title": "Open Git Repository",
+        "order": 1,
+        "properties": {
+          "open-git-repository.statusBar.enabled": {
+            "type": "boolean",
+            "default": true,
+            "description": "Show the status bar item for opening the remote repository in a browser"
+          },
+          "open-git-repository.statusBar.icon": {
+            "type": "string",
+            "enum": [
+              "browser",
+              "export",
+              "link",
+              "external",
+              "globe",
+              "preview",
+              "remote",
+              "repo",
+              "repoPull",
+              "rocket",
+              "signOut",
+              "sourceControl"
+            ],
+            "default": "globe",
+            "description": "The icon of the status bar item"
+          },
+          "open-git-repository.statusBar.alignment": {
+            "type": "string",
+            "enum": [
+              "left",
+              "right"
+            ],
+            "default": true,
+            "description": "Show the status bar item for opening the remote repository in a browser"
+          }
+        }
+      }
+    ],
     "commands": [
       {
         "command": "open-remote-repository.helloWorld",

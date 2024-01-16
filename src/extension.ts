@@ -1,5 +1,5 @@
 import * as vscode from "vscode";
-import { initializeExtension } from "./utils";
+import { initializeExtension } from "./core/utils";
 
 /**
  * - Consider using product icon "open-preview" or "repo" by default and allow the user to change it (https://code.visualstudio.com/api/references/icons-in-labels#icon-listing)
@@ -11,8 +11,11 @@ import { initializeExtension } from "./utils";
  * -
  * -
  */
-// This method is called when your extension is activated
-// Your extension is activated the very first time the command is executed
+
+/**
+ * Entry point of the extension - called when the extension is activated.
+ * Refer to activationEvents in package.json for the events that trigger this method.
+ */
 export function activate(context: vscode.ExtensionContext) {
   initializeExtension(context);
 }

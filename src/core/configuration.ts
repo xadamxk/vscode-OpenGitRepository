@@ -26,7 +26,8 @@ const IconMap = {
  * Configuration keys for the extension - must match the keys in package.json
  */
 export const ExtensionConfiguration = {
-  statusBarIcon: "statusBar.icon",
+  StatusBarIcon: "statusBar.icon",
+  StatusBarAlignment: "statusBar.alignment",
 };
 
 /**
@@ -44,7 +45,7 @@ export const determineStatusBarIcon = (statusBarIcon: string | undefined) => {
  * Determines the status bar alignment to use based on the configuration value.
  * Status bar alignment: https://code.visualstudio.com/api/references/vscode-api#StatusBarAlignment
  */
-export const determineStatusBarAlignment = (alignment: string) => {
+export const determineStatusBarAlignment = (alignment: string | undefined) => {
   switch (alignment) {
     default:
     case "left":

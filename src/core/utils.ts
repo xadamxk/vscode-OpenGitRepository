@@ -1,9 +1,14 @@
 import * as vscode from "vscode";
 import RegisteredCommands from "../commands";
 import { Commands, EXTENSION_NAME, STATUSBAR_TOOLTIP } from "../constants";
-import { StatusBarItem, WorkspaceConfiguration } from "vscode";
+import {
+  StatusBarAlignment,
+  StatusBarItem,
+  WorkspaceConfiguration,
+} from "vscode";
 import {
   ExtensionConfiguration,
+  determineStatusBarAlignment,
   determineStatusBarIcon,
 } from "./configuration";
 
@@ -26,14 +31,15 @@ const initializeStatusBar = (
   extensionConfiguration: WorkspaceConfiguration,
   command = Commands.OPEN_ORIGIN_REPOSITORY
 ): StatusBarItem => {
-  // TODO: Add configuration for status bar alignment (LEFT, RIGHT)
   const statusBarItem: StatusBarItem = vscode.window.createStatusBarItem(
-    vscode.StatusBarAlignment.Left,
+    determineStatusBarAlignment(
+      extensionConfiguration.get(ExtensionConfiguration.StatusBarAlignment)
+    ),
     100
   );
 
   const statusBarIcon = determineStatusBarIcon(
-    extensionConfiguration.get(ExtensionConfiguration.statusBarIcon)
+    extensionConfiguration.get(ExtensionConfiguration.StatusBarIcon)
   );
   updateStatusBarItem(statusBarItem, statusBarIcon, STATUSBAR_TOOLTIP, command);
   context.subscriptions.push(statusBarItem);
@@ -45,14 +51,14 @@ const listenForConfigurationChanges = (statusBarItem: StatusBarItem): void => {
   vscode.workspace.onDidChangeConfiguration((event) => {
     if (
       event.affectsConfiguration(
-        `${EXTENSION_NAME}.${ExtensionConfiguration.statusBarIcon}`
+        `${EXTENSION_NAME}.${ExtensionConfiguration.StatusBarIcon}`
       )
     ) {
       const extensionConfiguration =
         vscode.workspace.getConfiguration(EXTENSION_NAME);
 
       const statusBarIcon = determineStatusBarIcon(
-        extensionConfiguration.get(ExtensionConfiguration.statusBarIcon)
+        extensionConfiguration.get(ExtensionConfiguration.StatusBarIcon)
       );
 
       updateStatusBarItem(

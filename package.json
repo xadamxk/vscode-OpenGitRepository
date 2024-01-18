@@ -34,11 +34,23 @@
         "properties": {
           "open-git-repository.statusBar.enabled": {
             "type": "boolean",
+            "order": 1,
             "default": true,
             "description": "Show the status bar item for opening the remote repository in a browser"
           },
+          "open-git-repository.statusBar.alignment": {
+            "type": "string",
+            "order": 2,
+            "enum": [
+              "left",
+              "right"
+            ],
+            "default": "right",
+            "description": "Which side of the status bar to show the action button on"
+          },
           "open-git-repository.statusBar.icon": {
             "type": "string",
+            "order": 3,
             "enum": [
               "browser",
               "export",
@@ -55,25 +67,29 @@
             ],
             "default": "globe",
             "description": "The icon of the status bar item"
-          },
-          "open-git-repository.statusBar.alignment": {
-            "type": "string",
-            "enum": [
-              "left",
-              "right"
-            ],
-            "default": true,
-            "description": "Show the status bar item for opening the remote repository in a browser"
           }
         }
       }
     ],
     "commands": [
       {
-        "command": "open-remote-repository.helloWorld",
-        "title": "Hello World"
+        "command": "open-git-repository.openOriginRepository",
+        "title": "Open Repository in Browser"
+      },
+      {
+        "command": "open-git-repository.openOriginFile",
+        "title": "Open File in Browser"
       }
-    ]
+    ],
+    "menus": {
+      "explorer/context": [
+        {
+          "when": "resourceScheme == 'file'",
+          "command": "open-git-repository.openOriginFile",
+          "group": "z_commands"
+        }
+      ]
+    }
   },
   "scripts": {
     "vscode:prepublish": "npm run package",

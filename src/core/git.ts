@@ -1,4 +1,5 @@
 import { simpleGit, SimpleGitOptions } from "simple-git";
+import * as vscode from "vscode";
 
 const baseOptions: Partial<SimpleGitOptions> = {
   binary: "git",
@@ -19,5 +20,13 @@ export const getRemoteOriginUrl = (baseDirectory: string): Promise<string> => {
     .then((remotes): string => {
       const remoteOrigin = remotes.find((r) => r.name === "origin");
       return remoteOrigin?.refs.fetch || "";
+    });
+};
+
+export const getBranchName = (baseDirectory: string): Promise<string> => {
+  return simpleGit(buildGitOptions(baseDirectory))
+    .branch()
+    .then((branchSummary) => {
+      return branchSummary.current;
     });
 };

@@ -1,4 +1,4 @@
-const providers = {
+export const Providers = {
   GITHUB: "github.com",
   BITBUCKET: "bitbucket",
   HEPTAPOD: "heptapod.net",

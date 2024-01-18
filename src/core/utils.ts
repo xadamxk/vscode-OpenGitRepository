@@ -29,7 +29,7 @@ const initializeCommands = (context: vscode.ExtensionContext): void => {
 const initializeStatusBar = (
   context: vscode.ExtensionContext,
   extensionConfiguration: WorkspaceConfiguration,
-  command = Commands.OPEN_ORIGIN_REPOSITORY
+  command = Commands.OPEN_REPOSITORY
 ): StatusBarItem => {
   const statusBarItem: StatusBarItem = vscode.window.createStatusBarItem(
     determineStatusBarAlignment(
@@ -65,7 +65,7 @@ const listenForConfigurationChanges = (statusBarItem: StatusBarItem): void => {
         statusBarItem,
         statusBarIcon,
         STATUSBAR_TOOLTIP,
-        Commands.OPEN_ORIGIN_REPOSITORY
+        Commands.OPEN_REPOSITORY
       );
     }
   });

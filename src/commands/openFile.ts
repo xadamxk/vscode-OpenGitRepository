@@ -3,6 +3,7 @@ import { Commands, EXTENSION_NAME } from "../constants";
 import { getBranchName, getRemoteOriginUrl } from "../core/git";
 import { GitHubProvider } from "../providers/GitHub";
 import { Providers } from "../providers/util";
+import { GitLabProvider } from "../providers/GitLab";
 
 export const openFileCommand = (): vscode.Disposable => {
   return vscode.commands.registerCommand(
@@ -23,6 +24,13 @@ export const openFileCommand = (): vscode.Disposable => {
           const filePath = cmdArgs.path.replace(projectPath, "");
           if (remoteOriginUrl.includes(Providers.GITHUB)) {
             const url = new GitHubProvider(
+              remoteOriginUrl,
+              filePath,
+              currentBranchName
+            ).formatFileUrl();
+            vscode.env.openExternal(vscode.Uri.parse(url));
+          } else if (remoteOriginUrl.includes(Providers.GITLAB)) {
+            const url = new GitLabProvider(
               remoteOriginUrl,
               filePath,
               currentBranchName

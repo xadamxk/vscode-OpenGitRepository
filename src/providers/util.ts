@@ -1,7 +1,7 @@
 export const Providers = {
   GITHUB: "github.com",
   BITBUCKET: "bitbucket",
-  HEPTAPOD: "heptapod.net",
+  GITLAB: "gitlab.com",
 };
 
 export const formatUrl = (url: string): string => {

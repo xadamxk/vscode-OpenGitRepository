@@ -21,7 +21,7 @@
 
 ## Extension Settings
 
-![alt text](./images/settings.PNG)
+![Extension settings](./images/settings.png)
 
 ## Release Notes
 

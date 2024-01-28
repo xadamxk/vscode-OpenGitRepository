@@ -4,10 +4,19 @@
   "description": "Open git repository links in your browser (GitHub, BitBucket, GitLab, SourceForge, and more!)",
   "version": "0.0.1",
   "license": "MIT",
+  "icon": "images/octoogre-200.png",
   "publisher": "xadamxk",
+  "homepage": "https://github.com/xadamxk/vscode-OpenGitRepository",
+  "bugs": {
+    "url": "https://github.com/xadamxk/vscode-OpenGitRepository/issues"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/xadamxk/vscode-OpenGitRepository.git"
+  },
+  "author": {
+    "name": "xadamxk",
+    "url": "https://github.com/xadamxk"
   },
   "engines": {
     "vscode": "^1.85.0"

@@ -1,6 +1,6 @@
 export const Providers = {
   GITHUB: "github.com",
-  BITBUCKET: "bitbucket",
+  BITBUCKET: "bitbucket.com",
   GITLAB: "gitlab.com",
 };
 

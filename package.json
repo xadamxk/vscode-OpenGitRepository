@@ -2,7 +2,7 @@
   "name": "open-git-repository",
   "displayName": "Open Git Repository",
   "description": "Open git repository links in your browser (GitHub, BitBucket, GitLab, SourceForge, and more!)",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "license": "MIT",
   "icon": "images/octoogre-200.png",
   "publisher": "xadamxk",

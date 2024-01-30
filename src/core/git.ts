@@ -14,7 +14,7 @@ const buildGitOptions = (path: string): Partial<SimpleGitOptions> => {
   };
 };
 
-export const getRemoteOriginUrl = (baseDirectory: string): Promise<string> => {
+export const getRemoteOrigin = (baseDirectory: string): Promise<string> => {
   return simpleGit(buildGitOptions(baseDirectory))
     .getRemotes(true)
     .then((remotes): string => {

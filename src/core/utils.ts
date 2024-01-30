@@ -82,3 +82,19 @@ const updateStatusBarItem = (
   statusBarItem.command = command;
   statusBarItem.show();
 };
+
+export const formatRemoteOriginalUrl = (remoteOrigin: string): string => {
+  // Regular expression to match the Git origin format
+  const gitOriginRegex = /^(git@|https:\/\/)([^:/]+)[:\/](.+\/[^.]+)(\.git)?$/;
+  const match = remoteOrigin.match(gitOriginRegex);
+
+  if (match) {
+    const host = match[2].replace(":", "/"); // Replace ssh colon with http slash
+    const repositoryPath = match[3];
+
+    return `https://${host}/${repositoryPath}`;
+  } else {
+    console.error("Invalid Git origin format");
+    return remoteOrigin;
+  }
+};

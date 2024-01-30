@@ -1,9 +1,10 @@
 import * as vscode from "vscode";
 import { Commands, EXTENSION_NAME } from "../constants";
-import { getBranchName, getRemoteOriginUrl } from "../core/git";
+import { getBranchName, getRemoteOrigin } from "../core/git";
 import { GitHubProvider } from "../providers/GitHub";
 import { Providers } from "../providers/util";
 import { GitLabProvider } from "../providers/GitLab";
+import { formatRemoteOriginalUrl } from "../core/utils";
 
 export const openFileCommand = (): vscode.Disposable => {
   return vscode.commands.registerCommand(
@@ -13,9 +14,8 @@ export const openFileCommand = (): vscode.Disposable => {
         const workSpaceUri = vscode.workspace.workspaceFolders[0].uri;
         const workSpaceFileSystemPath = workSpaceUri.fsPath;
         const projectPath = workSpaceUri.path;
-        const remoteOriginUrl = await getRemoteOriginUrl(
-          workSpaceFileSystemPath
-        );
+        const remoteOrigin = await getRemoteOrigin(workSpaceFileSystemPath);
+        const remoteOriginUrl = formatRemoteOriginalUrl(remoteOrigin);
         if (remoteOriginUrl) {
           const currentBranchName = await getBranchName(
             workSpaceFileSystemPath

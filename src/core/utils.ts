@@ -52,6 +52,9 @@ const listenForConfigurationChanges = (statusBarItem: StatusBarItem): void => {
     if (
       event.affectsConfiguration(
         `${EXTENSION_NAME}.${ExtensionConfiguration.StatusBarIcon}`
+      ) ||
+      event.affectsConfiguration(
+        `${EXTENSION_NAME}.${ExtensionConfiguration.StatusBarEnabled}`
       )
     ) {
       const extensionConfiguration =
@@ -60,12 +63,16 @@ const listenForConfigurationChanges = (statusBarItem: StatusBarItem): void => {
       const statusBarIcon = determineStatusBarIcon(
         extensionConfiguration.get(ExtensionConfiguration.StatusBarIcon)
       );
+      const enableStatusBarIcon =
+        extensionConfiguration.get(ExtensionConfiguration.StatusBarEnabled) ===
+        true;
 
       updateStatusBarItem(
         statusBarItem,
         statusBarIcon,
         STATUSBAR_TOOLTIP,
-        Commands.OPEN_REPOSITORY
+        Commands.OPEN_REPOSITORY,
+        enableStatusBarIcon
       );
     }
   });
@@ -75,10 +82,27 @@ const updateStatusBarItem = (
   statusBarItem: StatusBarItem,
   text: string,
   tooltip: string,
-  command: Commands
+  command: Commands,
+  show = true
 ) => {
   statusBarItem.text = `$(${text})`;
   statusBarItem.tooltip = tooltip;
   statusBarItem.command = command;
-  statusBarItem.show();
+  show ? statusBarItem.show() : statusBarItem.hide();
+};
+
+export const formatRemoteOriginalUrl = (remoteOrigin: string): string => {
+  // Regular expression to match the Git origin format
+  const gitOriginRegex = /^(git@|https:\/\/)([^:/]+)[:\/](.+\/[^.]+)(\.git)?$/;
+  const match = remoteOrigin.match(gitOriginRegex);
+
+  if (match) {
+    const host = match[2].replace(":", "/"); // Replace ssh colon with http slash
+    const repositoryPath = match[3];
+
+    return `https://${host}/${repositoryPath}`;
+  } else {
+    console.error("Invalid Git origin format");
+    return remoteOrigin;
+  }
 };

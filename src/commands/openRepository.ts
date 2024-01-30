@@ -1,7 +1,8 @@
 import * as vscode from "vscode";
 import { Commands, EXTENSION_NAME } from "../constants";
-import { getRemoteOriginUrl } from "../core/git";
+import { getRemoteOrigin } from "../core/git";
 import { formatUrl } from "../providers/util";
+import { formatRemoteOriginalUrl } from "../core/utils";
 
 export const openRepositoryCommand = (): vscode.Disposable => {
   return vscode.commands.registerCommand(Commands.OPEN_REPOSITORY, async () => {
@@ -11,7 +12,8 @@ export const openRepositoryCommand = (): vscode.Disposable => {
       //    var currentlyOpenTabfileName = path.basename(currentlyOpenTabfilePath);
       const folderPath = vscode.workspace.workspaceFolders[0].uri.fsPath;
 
-      const remoteOriginUrl = await getRemoteOriginUrl(folderPath);
+      const remoteOrigin = await getRemoteOrigin(folderPath);
+      const remoteOriginUrl = formatRemoteOriginalUrl(remoteOrigin);
       if (remoteOriginUrl) {
         vscode.env.openExternal(vscode.Uri.parse(formatUrl(remoteOriginUrl)));
       } else {

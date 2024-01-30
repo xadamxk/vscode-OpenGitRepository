@@ -25,6 +25,9 @@
 
 ## Release Notes
 
-1.0.0
+1.0.1
+- Fixes url generation for ssh based origins
+- Updates status bar icon on setting change (excludes alignment)
 
+1.0.0
 - Initial release

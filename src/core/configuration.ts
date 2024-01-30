@@ -26,6 +26,7 @@ const IconMap = {
  * Configuration keys for the extension - must match the keys in package.json
  */
 export const ExtensionConfiguration = {
+  StatusBarEnabled: "statusBar.enabled",
   StatusBarIcon: "statusBar.icon",
   StatusBarAlignment: "statusBar.alignment",
 };

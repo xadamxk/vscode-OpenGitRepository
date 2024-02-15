@@ -1,4 +1,5 @@
 # Open Git Repository Extension (OGRE)
+![Installs](https://vsmarketplacebadges.dev/installs/xadamxk.open-git-repository.svg) ![Downloads](https://vsmarketplacebadges.dev/downloads/xadamxk.open-git-repository.svg) ![Rating](https://vsmarketplacebadges.dev/rating/xadamxk.open-git-repository.svg) ![Version](https://vsmarketplacebadges.dev/version/xadamxk.open-git-repository.svg)
 
 ![alt text](./images/octoogre-200.png)
 
